@@ -1,0 +1,136 @@
+:root{
+  --bg:#071025;
+  --panel: rgba(255,255,255,0.03);
+  --accent:#f59e0b;
+  --text:#eef2ff;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;
+  background:linear-gradient(180deg,#021223 0%, #071025 100%);
+  color:var(--text);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+  overflow:hidden;
+}
+
+/* moving background layer */
+.bg{
+  position:fixed;
+  inset:0;
+  overflow:hidden;
+  z-index:0;
+  pointer-events:none;
+  opacity:0.55;
+}
+.racetrack{
+  position:absolute;
+  width:300%;
+  height:100%;
+  left:-50%;
+  top:0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.05), rgba(0,0,0,0.15));
+}
+.car{
+  position:absolute;
+  width:120px;
+  height:48px;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 48"><rect rx="8" ry="8" width="120" height="48" fill="%23ff4b4b"/><circle cx="24" cy="36" r="8" fill="%23000"/><circle cx="96" cy="36" r="8" fill="%23000"/></svg>') no-repeat center/contain;
+  top: 10%;
+  transform: translateX(0);
+  will-change: transform;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.6));
+  opacity:0.95;
+}
+.car--a{top:12%; animation:driveA 9s linear infinite}
+.car--b{top:30%; animation:driveB 11s linear infinite}
+.car--c{top:50%; animation:driveC 8s linear infinite}
+.car--d{top:72%; animation:driveD 12s linear infinite}
+
+@keyframes driveA { 0%{transform:translateX(-40%)} 100%{transform:translateX(160%)} }
+@keyframes driveB { 0%{transform:translateX(-60%)} 100%{transform:translateX(160%)} }
+@keyframes driveC { 0%{transform:translateX(-80%)} 100%{transform:translateX(160%)} }
+@keyframes driveD { 0%{transform:translateX(-100%)} 100%{transform:translateX(160%)} }
+
+/* Panel */
+.container{
+  position:relative;
+  z-index:2;
+  width:100%;
+  max-width:720px;
+  padding:24px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius:12px;
+  box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+  text-align:center;
+  backdrop-filter: blur(4px);
+}
+h1{margin:0 0 18px 0;font-size:1.6rem}
+.controls{
+  display:flex;
+  gap:12px;
+  justify-content:center;
+  align-items:center;
+  margin-bottom:18px;
+  flex-wrap:wrap;
+}
+.balance{font-weight:700}
+.bet input{
+  width:80px;
+  padding:6px 8px;
+  border-radius:6px;
+  border:1px solid rgba(255,255,255,0.06);
+  background:transparent;
+  color:var(--text);
+}
+.buttons{display:flex;gap:8px}
+#spinButton{
+  background:var(--accent);
+  color:#071025;
+  padding:8px 14px;
+  border-radius:8px;
+  border:none;
+  cursor:pointer;
+  font-weight:700;
+  box-shadow:0 6px 14px rgba(245,158,11,0.18);
+}
+#maxButton{
+  background:transparent;
+  border:1px solid rgba(255,255,255,0.06);
+  color:var(--text);
+  padding:6px 10px;
+  border-radius:8px;
+  cursor:pointer;
+}
+#spinButton:disabled{opacity:0.6;cursor:not-allowed}
+
+.machine{
+  display:flex;
+  gap:12px;
+  justify-content:center;
+  margin:18px 0;
+}
+.reel{
+  width:140px;
+  height:140px;
+  border-radius:14px;
+  background:var(--panel);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:64px;
+  border:1px solid rgba(255,255,255,0.04);
+  box-shadow: inset 0 -6px 18px rgba(0,0,0,0.5);
+}
+.symbol{pointer-events:none; user-select:none}
+
+.message{
+  min-height:34px;
+  margin-top:6px;
+  font-weight:700;
+}
+.notes{margin-top:12px; color:rgba(255,255,255,0.6); font-size:0.9rem}
